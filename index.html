@@ -482,3 +482,64 @@
 
     <label for="buyer-phone">Your Phone Number</label>
     <input type="tel" id="buyer-phone" name="buyerPhone" required aria-required="true" placeholder="e.g. 360-809-4085" />
+    <script>
+  const data = {
+    speed: { title:'Speed & Explosiveness', desc:'Improve speed, agility & explosion.', price:'$75/month' },
+    bodybuilding: { title:'Bodybuilding + Nutrition', desc:'Build muscle and optimize nutrition.', price:'$175/month' },
+    diet: { title:'Personalized Diet Plan', desc:'Customized meal plans for your goals.', price:'$100' },
+    inperson: { title:'In‑Person Training', desc:'One‑on‑one sessions for maximum results.', price:'$50/session' },
+  };
+
+  const paymentHtml = `
+    <p>Zelle / Apple Pay: 360‑809‑4085</p>
+    <p>Venmo: @aiden_gockerell</p>
+    <p>CashApp: $AidenGockerell</p>
+  `;
+
+  const cards = document.querySelectorAll('.program-card');
+  const details = document.getElementById('details');
+  const closeBtn = details.querySelector('.close-btn');
+  const titleEl = document.getElementById('program-title');
+  const descEl = document.getElementById('program-desc');
+  const payEl = document.getElementById('payment-methods');
+  const weightContainer = document.getElementById('morning-weight-container');
+  const form = document.getElementById('confirm-form');
+  const formMessage = document.getElementById('form-message');
+  const backTop = document.getElementById('back-to-top');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.getAttribute('data-program');
+      const prog = data[key];
+      titleEl.textContent = `${prog.title} — ${prog.price}`;
+      descEl.textContent = prog.desc;
+      payEl.innerHTML = paymentHtml;
+      weightContainer.style.display = key === 'diet' ? 'block' : 'none';
+      form.reset();
+      formMessage.style.display = 'none';
+      details.style.display = 'block';
+      details.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    details.style.display = 'none';
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('✅ Thank you! Your purchase confirmation has been sent.');
+    formMessage.style.display = 'block';
+    details.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    backTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  backTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Hide weight field initially
+  weightContainer.style.display = 'none';
+</script>
