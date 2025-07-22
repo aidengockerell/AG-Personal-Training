@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AG Personal Training</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; }
-    header { background: #2c3e50; color: white; text-align: center; padding: 20px; }
-    .programs { display: flex; flex-wrap: wrap; justify-content: center; padding: 10px; }
-    .program { width: 100%; max-width: 300px; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
-    .program img { width: 100%; height: auto; }
-    .program h3, .program p { margin: 10px; }
-    .contact, .booking { padding: 20px; }
-    label { display: block; margin: 8px 0 4px; }
-    input, select, textarea, button { width: 100%; padding: 10px; margin-bottom: 10px; }
-    button { background: #e67e22; color: white; border: none; border-radius: 5px; }
-    @media (max-width: 600px) {
-      .program { width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AG Personal Training</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fafafa; color:#222; }
+  header { background:#2c3e50; color:#fff; padding:20px; text-align:center; }
+  header h1 { margin:0 0 5px; }
+  .programs { display:flex; flex-wrap:wrap; justify-content:center; padding:20px; gap:20px; }
+  .program-card {
+    background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    max-width:300px; cursor:pointer; transition: transform 0.2s;
+  }
+  .program-card:hover { transform: scale(1.03); }
+  .program-card img { width:100%; border-top-left-radius:8px; border-top-right-radius:8px; }
+  .program-card h3 { margin:15px 10px 5px; }
+  .program-card p { margin:0 10px 15px; color:#555; }
+  #details {
+    max-width:600px; margin: 30px auto; background:#fff; border-radius:8px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    display:none;
+  }
+  #details h2 { margin-top:0; }
+  #payment-methods p { margin: 5px 0; }
+  #confirm-form label { display:block; margin:10px 0 5px; }
+  #confirm-form input, #confirm-form button {
+    width: 100%; padding: 10px; margin-bottom: 10px; border-radius:5px; border:1px solid #ccc; font-size:1em;
+  }
+  #confirm-form button {
+    background:#e67e22; color:#fff; border:none; cursor:pointer; font-weight:bold;
+  }
+  #confirm-form button:hover { background:#cf6b10; }
+  footer {
+    background:#2c3e50; color:#fff; text-align:center; padding:20px 10px; margin-top:40px;
+  }
+  footer a { color:#fff; text-decoration:none; margin: 0 8px; font-weight: bold; }
+  footer a.instagram-icon {
+    display: inline-block;
+    vertical-align: middle;
+    width:24px; height:24px;
+    fill: #fff;
+  }
+  @media (max-width: 650px) {
+    .programs { flex-direction: column; align-items: center; }
+    #details { margin: 20px 10px; }
+  }
+</style>
 </head>
 <body>
 
@@ -27,58 +54,169 @@
   <p>Phoenix, AZ — Reach your peak performance</p>
 </header>
 
-<section class="programs">
-  <div class="program">
-    <img src="https://via.placeholder.com/600x400?text=Speed+Training" alt="Speed & Explosiveness">
+<section class="programs" id="program-list">
+  <div class="program-card" data-program="speed">
+    <img src="https://via.placeholder.com/300x200?text=Speed+%26+Explosiveness" alt="Speed & Explosiveness" />
     <h3>Speed & Explosiveness</h3>
     <p>$75/month</p>
   </div>
-  <div class="program">
-    <img src="https://via.placeholder.com/600x400?text=Bodybuilding" alt="Bodybuilding Program">
+  <div class="program-card" data-program="bodybuilding">
+    <img src="https://via.placeholder.com/300x200?text=Bodybuilding+%2B+Nutrition" alt="Bodybuilding + Nutrition" />
     <h3>Bodybuilding + Nutrition</h3>
     <p>$175/month</p>
   </div>
-  <div class="program">
-    <img src="https://via.placeholder.com/600x400?text=Diet+Plan" alt="Diet Plan">
+  <div class="program-card" data-program="diet">
+    <img src="https://via.placeholder.com/300x200?text=Personalized+Diet+Plan" alt="Personalized Diet Plan" />
     <h3>Personalized Diet Plan</h3>
     <p>$100</p>
   </div>
-  <div class="program">
-    <img src="https://via.placeholder.com/600x400?text=In+Person" alt="In-Person Training">
+  <div class="program-card" data-program="inperson">
+    <img src="https://via.placeholder.com/300x200?text=In-Person+Training" alt="In-Person Training" />
     <h3>In-Person Training</h3>
     <p>$50/session</p>
   </div>
 </section>
 
-<section class="booking">
-  <h2>Book a Session</h2>
-  <form>
-    <label for="name">Name</label>
-    <input type="text" id="name" required>
+<section id="details">
+  <h2 id="program-title"></h2>
+  <p id="program-desc"></p>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" required>
+  <h3>Payment Methods</h3>
+  <div id="payment-methods"></div>
 
-    <label for="program">Select Program</label>
-    <select id="program" required>
-      <option>Speed & Explosiveness</option>
-      <option>Bodybuilding + Nutrition</option>
-      <option>Personalized Diet Plan</option>
-      <option>In-Person Training</option>
-    </select>
+  <h3>Confirm Your Purchase</h3>
+  <form id="confirm-form">
+    <label for="buyer-name">Your Name</label>
+    <input type="text" id="buyer-name" name="buyerName" required />
 
-    <label for="date">Preferred Start Date</label>
-    <input type="date" id="date">
+    <label for="buyer-email">Your Email</label>
+    <input type="email" id="buyer-email" name="buyerEmail" required />
 
-    <button type="submit">Submit</button>
+    <label for="buyer-phone">Your Phone Number</label>
+    <input type="tel" id="buyer-phone" name="buyerPhone" required placeholder="e.g. 360-809-4085" />
+
+    <button type="submit">Send Confirmation</button>
   </form>
+
+  <p id="form-message" style="color:green; font-weight:bold; display:none;">Thank you! Confirmation sent.</p>
 </section>
 
-<section class="contact">
-  <h2>Contact</h2>
-  <p><strong>Phone:</strong> <a href="tel:3608094085">360-809-4085</a></p>
-  <p><strong>Email:</strong> <a href="mailto:aidenbeau@icloud.com">aidenbeau@icloud.com</a></p>
-</section>
+<footer>
+  <p>Contact: <a href="tel:3608094085">360-809-4085</a> | <a href="mailto:Aidenbeau@icloud.com">Aidenbeau@icloud.com</a></p>
+  <a href="https://instagram.com/aiden.gockerell" target="_blank" aria-label="Instagram" class="instagram-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm4.25 3a4.25 4.25 0 110 8.5 4.25 4.25 0 010-8.5zm0 1.5a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5zm4.75-.88a1.13 1.13 0 11-2.26 0 1.13 1.13 0 012.26 0z"/></svg>
+  </a>
+</footer>
+
+<script>
+  const programs = {
+    speed: {
+      title: "Speed & Explosiveness",
+      desc: "Improve your acceleration, agility, and overall speed with tailored explosive training.",
+      payment: {
+        Zelle: "360-809-4085",
+        "Apple Pay": "360-809-4085",
+        CashApp: "$AidenGockerell",
+        Venmo: "@aiden_gockerell"
+      }
+    },
+    bodybuilding: {
+      title: "Bodybuilding + Nutrition",
+      desc: "Build muscle mass and optimize nutrition for best results with expert guidance.",
+      payment: {
+        Zelle: "360-809-4085",
+        "Apple Pay": "360-809-4085",
+        CashApp: "$AidenGockerell",
+        Venmo: "@aiden_gockerell"
+      }
+    },
+    diet: {
+      title: "Personalized Diet Plan",
+      desc: "Customized meal plans tailored to your goals and lifestyle for optimal nutrition.",
+      payment: {
+        Zelle: "360-809-4085",
+        "Apple Pay": "360-809-4085",
+        CashApp: "$AidenGockerell",
+        Venmo: "@aiden_gockerell"
+      }
+    },
+    inperson: {
+      title: "In-Person Training",
+      desc: "One-on-one personal training sessions to maximize results with direct coaching.",
+      payment: {
+        Zelle: "360-809-4085",
+        "Apple Pay": "360-809-4085",
+        CashApp: "$AidenGockerell",
+        Venmo: "@aiden_gockerell"
+      }
+    }
+  };
+
+  const programCards = document.querySelectorAll(".program-card");
+  const detailsSection = document.getElementById("details");
+  const titleEl = document.getElementById("program-title");
+  const descEl = document.getElementById("program-desc");
+  const paymentMethodsEl = document.getElementById("payment-methods");
+  const form = document.getElementById("confirm-form");
+  const formMessage = document.getElementById("form-message");
+
+  let selectedProgram = null;
+
+  programCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const progKey = card.getAttribute("data-program");
+      selectedProgram = programs[progKey];
+      if (!selectedProgram) return;
+
+      titleEl.textContent = selectedProgram.title;
+      descEl.textContent = selectedProgram.desc;
+
+      // Build payment method list
+      paymentMethodsEl.innerHTML = "";
+      for (const [method, username] of Object.entries(selectedProgram.payment)) {
+        const p = document.createElement("p");
+        p.textContent = `${method}: ${username}`;
+        paymentMethodsEl.appendChild(p);
+      }
+
+      formMessage.style.display = "none";
+      detailsSection.style.display = "block";
+
+      // Scroll to details
+      detailsSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!selectedProgram) {
+      alert("Please select a program first.");
+      return;
+    }
+
+    const name = form["buyerName"].value.trim();
+    const email = form["buyerEmail"].value.trim();
+    const phone = form["buyerPhone"].value.trim();
+
+    if (!name || !email || !phone) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    // Here you'd send data to your backend or form service
+    // Example: POST to a server endpoint with fetch()
+
+    // For demo, just show confirmation message
+    formMessage.style.display = "block";
+    form.reset();
+
+    alert(`Thanks ${name}! We received your confirmation for ${selectedProgram.title}. We will contact you soon.`);
+
+    // Optionally scroll back up
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
 
 </body>
 </html>
