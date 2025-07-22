@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AG Personal Training</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    header { background: #2c3e50; color: white; text-align: center; padding: 20px; }
+    .programs { display: flex; flex-wrap: wrap; justify-content: center; padding: 10px; }
+    .program { width: 100%; max-width: 300px; margin: 10px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+    .program img { width: 100%; height: auto; }
+    .program h3, .program p { margin: 10px; }
+    .contact, .booking { padding: 20px; }
+    label { display: block; margin: 8px 0 4px; }
+    input, select, textarea, button { width: 100%; padding: 10px; margin-bottom: 10px; }
+    button { background: #e67e22; color: white; border: none; border-radius: 5px; }
+    @media (max-width: 600px) {
+      .program { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AG Personal Training</h1>
+  <p>Phoenix, AZ — Reach your peak performance</p>
+</header>
+
+<section class="programs">
+  <div class="program">
+    <img src="https://via.placeholder.com/600x400?text=Speed+Training" alt="Speed & Explosiveness">
+    <h3>Speed & Explosiveness</h3>
+    <p>$75/month</p>
+  </div>
+  <div class="program">
+    <img src="https://via.placeholder.com/600x400?text=Bodybuilding" alt="Bodybuilding Program">
+    <h3>Bodybuilding + Nutrition</h3>
+    <p>$175/month</p>
+  </div>
+  <div class="program">
+    <img src="https://via.placeholder.com/600x400?text=Diet+Plan" alt="Diet Plan">
+    <h3>Personalized Diet Plan</h3>
+    <p>$100</p>
+  </div>
+  <div class="program">
+    <img src="https://via.placeholder.com/600x400?text=In+Person" alt="In-Person Training">
+    <h3>In-Person Training</h3>
+    <p>$50/session</p>
+  </div>
+</section>
+
+<section class="booking">
+  <h2>Book a Session</h2>
+  <form>
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" required>
+
+    <label for="program">Select Program</label>
+    <select id="program" required>
+      <option>Speed & Explosiveness</option>
+      <option>Bodybuilding + Nutrition</option>
+      <option>Personalized Diet Plan</option>
+      <option>In-Person Training</option>
+    </select>
+
+    <label for="date">Preferred Start Date</label>
+    <input type="date" id="date">
+
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<section class="contact">
+  <h2>Contact</h2>
+  <p><strong>Phone:</strong> <a href="tel:3608094085">360-809-4085</a></p>
+  <p><strong>Email:</strong> <a href="mailto:aidenbeau@icloud.com">aidenbeau@icloud.com</a></p>
+</section>
+
+</body>
+</html>
