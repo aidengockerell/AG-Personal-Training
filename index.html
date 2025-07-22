@@ -220,3 +220,37 @@
 
 </body>
 </html>
+<h3>Please answer these questions before confirming</h3>
+<form id="confirm-form">
+  <label for="fitness-goals">What are your fitness goals?</label>
+  <select id="fitness-goals" name="fitnessGoals" required>
+    <option value="" disabled selected>Select one</option>
+    <option value="lose weight">Lose Weight</option>
+    <option value="gain weight">Gain Weight</option>
+    <option value="get faster">Get Faster</option>
+    <option value="more explosive">More Explosive</option>
+  </select>
+
+  <label for="medical-conditions">Do you have any medical conditions that could put you in danger from intense exercise?</label>
+  <select id="medical-conditions" name="medicalConditions" required>
+    <option value="" disabled selected>Select one</option>
+    <option value="no">No</option>
+    <option value="yes">Yes</option>
+  </select>
+
+  <label for="morning-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
+  <input type="text" id="morning-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required />
+
+  <hr />
+
+  <label for="buyer-name">Your Name</label>
+  <input type="text" id="buyer-name" name="buyerName" required />
+
+  <label for="buyer-email">Your Email</label>
+  <input type="email" id="buyer-email" name="buyerEmail" required />
+
+  <label for="buyer-phone">Your Phone Number</label>
+  <input type="tel" id="buyer-phone" name="buyerPhone" required placeholder="e.g. 360-809-4085" />
+
+  <button type="submit">Send Confirmation</button>
+</form>
