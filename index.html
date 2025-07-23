@@ -1,188 +1,409 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AG Personal Training</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: Arial, sans-serif; background:#f4f4f4; color:#333; scroll-behavior:smooth; }
-    header { position:sticky; top:0; background:#111; color:#fff; text-align:center; padding:20px; z-index:100; }
-    header h1 { margin:0; font-size:2em; }
-    .cta-button {
-      display: inline-block;
-      background: #e67e22;
-      color: #fff;
-      font-weight: 700;
-      padding: 12px 25px;
-      border-radius: 25px;
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; 
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #222;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: inherit;
       text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      user-select:none;
     }
-    .cta-button:hover { background: #cf6b10; }
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(44, 62, 80, 0.95);
+      color: #fff;
+      padding: 20px 10px;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
 
-    .programs { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .program-card {
-      background:#fff; border-radius:8px; overflow:hidden; width:280px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
-      display: flex; flex-direction: column; align-items: center; padding: 20px;
-      color: white; font-weight: 700; font-size: 1.25em; user-select:none;
+    /* Hero Section */
+    #hero {
+      background: url('https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
+      height: 350px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      user-select: none;
     }
-    .program-card:hover { transform:translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
-    .color-block {
+
+    /* Programs Grid */
+    .programs {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 10px;
+    }
+    .program-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      max-width: 280px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+    .program-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
+    }
+    .program-card img {
       width: 100%;
       height: 160px;
-      border-radius: 8px;
-      margin-bottom: 15px;
+      object-fit: cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
       transition: transform 0.3s ease;
     }
-    .program-card:hover .color-block { transform: scale(1.05); }
-    .speed { background: #ff6b6b; }           /* bright red */
-    .bodybuilding { background: #1e90ff; }   /* dodger blue */
-    .diet { background: #ffa500; }            /* orange */
-    .inperson { background: #28a745; }        /* green */
-
-    #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; position:relative; color: #222;}
-    @keyframes fade-in { from{opacity:0;transform:translateY(20px);} to{opacity:1; transform:none;} }
-    .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#999; }
-    .close-btn:hover { color:red; }
-
-    footer { background:#111; color:#aaa; text-align:center; padding:20px; font-size:0.9em; margin-top:40px; }
-    footer a { color:#e67e22; text-decoration:none; }
-    footer a:hover { text-decoration:underline; }
-
-    /* FAQ */
-    #faq {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 15px;
+    .program-card:hover img {
+      transform: scale(1.1);
     }
-    #faq h2 {
-      font-size: 2rem;
-      color: #2c3e50;
-      font-weight: 700;
-      margin-bottom: 25px;
-      text-align: center;
-      font-family: Arial, sans-serif;
+    .program-card h3 {
+      font-family: 'Poppins', sans-serif;
+      margin: 15px 15px 5px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #333;
     }
-    .faq-item {
-      background: #fff;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      cursor: pointer;
-      user-select:none;
-      transition: background 0.3s ease;
-      overflow: hidden;
-    }
-    .faq-item:hover {
-      background: #f0f0f0;
-    }
-    .faq-question {
-      padding: 15px 20px;
-      font-weight: 700;
-      color: #e67e22;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.1rem;
-    }
-    .faq-answer {
-      max-height: 0;
-      padding: 0 20px;
-      color: #444;
+    .program-card p {
+      margin: 0 15px 15px;
       font-weight: 500;
+      color: #555;
       font-size: 1rem;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      overflow: hidden;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 500px;
-      padding: 15px 20px 20px;
-    }
-    .faq-toggle {
-      font-weight: 900;
-      font-size: 1.6rem;
-      user-select:none;
-      transition: transform 0.3s ease;
-    }
-    .faq-item.active .faq-toggle {
-      transform: rotate(45deg);
     }
 
-    /* Booking form */
-    #booking {
-      max-width: 600px;
-      margin: 40px auto;
+    /* Details Section */
+    #details {
+      max-width: 650px;
+      margin: 40px auto 60px;
       background: #fff;
-      border-radius: 10px;
-      padding: 25px 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      font-family: Arial, sans-serif;
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      display: none;
+      font-size: 1.1rem;
+      color: #222;
+      user-select: none;
+      position: relative;
     }
-    #booking h2 {
+    #details h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
       margin-top: 0;
       font-size: 2rem;
-      font-weight: 700;
       color: #2c3e50;
-      text-align: center;
-      margin-bottom: 20px;
+      letter-spacing: 1px;
     }
-    #booking form label {
+    #details p {
+      margin: 12px 0 24px;
+      line-height: 1.6;
+    }
+    #payment-methods p {
+      margin: 5px 0;
+      font-weight: 600;
+      color: #444;
+    }
+    #payment-methods p::before {
+      content: "💸 ";
+    }
+    #details .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: #e67e22;
+      color: white;
+      border: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    #details .close-btn:hover {
+      background: #cf6b10;
+    }
+
+    /* Form styles */
+    form#confirm-form label {
       display: block;
       margin: 12px 0 6px;
       font-weight: 600;
       color: #2c3e50;
     }
-    #booking form input,
-    #booking form select,
-    #booking form textarea {
+    form#confirm-form select,
+    form#confirm-form input {
       width: 100%;
       padding: 12px;
-      border-radius: 8px;
-      border: 1.5px solid #ccc;
       font-size: 1rem;
-      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1.8px solid #ccc;
       transition: border-color 0.3s ease;
       outline-offset: 2px;
     }
-    #booking form input:focus,
-    #booking form select:focus,
-    #booking form textarea:focus {
+    form#confirm-form select:focus,
+    form#confirm-form input:focus {
       border-color: #e67e22;
       outline: none;
       box-shadow: 0 0 8px #e67e22aa;
     }
-    #booking form button {
+    form#confirm-form button {
+      margin-top: 20px;
       width: 100%;
-      background: #e67e22;
-      color: white;
+      padding: 15px;
       font-weight: 700;
       font-size: 1.2rem;
-      padding: 15px;
+      color: #fff;
+      background: #e67e22;
       border: none;
-      border-radius: 25px;
+      border-radius: 15px;
       cursor: pointer;
-      user-select:none;
       transition: background 0.3s ease;
+      user-select: none;
     }
-    #booking form button:hover {
+    form#confirm-form button:hover {
       background: #cf6b10;
     }
-    #booking #form-message {
+
+    /* Form success message */
+    #form-message {
       margin-top: 15px;
       font-weight: 700;
       color: #27ae60;
       display: none;
+      user-select: none;
+    }
+
+    /* Footer */
+    footer {
+      background: #2c3e50;
+      color: #fff;
+      padding: 25px 10px;
       text-align: center;
+      font-weight: 500;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      user-select: none;
+    }
+    footer a {
+      color: #fff;
+      font-weight: 700;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+      vertical-align: middle;
+    }
+    footer a:hover {
+      color: #e67e22;
+    }
+    footer a.instagram-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+      margin-left: 8px;
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #e67e22;
+      color: #fff;
+      border: none;
+      padding: 14px 18px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: none;
+      user-select: none;
+      transition: background 0.3s ease;
+      z-index: 9999;
+    }
+    #back-to-top:hover {
+      background: #cf6b10;
+    }
+
+    /* Testimonials */
+    #testimonials {
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      color: #2c3e50;
+    }
+    #testimonials h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .testimonial {
+      margin-bottom: 25px;
+      font-style: italic;
+      line-height: 1.5;
+      position: relative;
+      padding-left: 40px;
+    }
+    .testimonial::before {
+      content: "“";
+      font-family: 'Poppins', serif;
+      font-weight: 900;
+      font-size: 3rem;
+      color: #e67e22;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-style: normal;
+      margin-top: 8px;
+      text-align: right;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* FAQ Accordion */
+    #faq {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 20px 10px 40px;
+      color: #222;
+    }
+    #faq h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #2c3e50;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question {
+      padding: 18px 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #e67e22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 25px;
+      color: #444;
+      font-weight: 500;
+      transition: max-height 0.3s ease;
+      font-size: 1rem;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 400px;
+      padding: 15px 25px 25px;
+    }
+    .faq-toggle {
+      font-weight: 900;
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    /* Parallax Section */
+    #parallax {
+      background: url('https://images.unsplash.com/photo-1526401485004-0b4c2f0aeecb?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
+      height: 300px;
+      margin: 60px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      user-select: none;
     }
 
     /* Responsive */
-    @media(max-width:600px) {
-      .program-card { width: 95%; }
-      #booking { margin: 20px 10px; padding: 20px; }
-      #faq { margin: 20px 10px 40px; }
+    @media (max-width: 700px) {
+      .program-card {
+        max-width: 90vw;
+      }
+      #details {
+        margin: 30px 15px 50px;
+        padding: 25px 20px;
+      }
+      #hero {
+        font-size: 2rem;
+        height: 250px;
+      }
+      #parallax {
+        font-size: 1.8rem;
+        height: 220px;
+      }
     }
   </style>
 </head>
@@ -190,214 +411,86 @@
 
 <header>
   <h1>AG Personal Training</h1>
-  <a href="#booking" class="cta-button" aria-label="Book a session">Book A Session</a>
+  <p>Phoenix, AZ — Reach your peak performance</p>
 </header>
 
-<section class="programs" aria-label="Programs offered">
-  <div class="program-card speed" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month" tabindex="0" role="button" aria-pressed="false">
-    <div class="color-block speed" aria-hidden="true"></div>
-    Speed & Explosiveness
+<section id="hero" aria-label="Main banner">
+  YOUR PEAK PERFORMANCE STARTS HERE
+</section>
+
+<section class="programs" id="program-list" aria-label="Programs offered">
+  <div class="program-card" data-program="speed" tabindex="0" aria-label="Speed and Explosiveness program">
+    <img src="https://images.unsplash.com/photo-1594737625785-43f24d05d372?auto=format&fit=crop&w=600&q=80" alt="Speed and Explosiveness Training" />
+    <h3>Speed & Explosiveness</h3>
     <p>$75/month</p>
   </div>
-  <div class="program-card bodybuilding" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month" tabindex="0" role="button" aria-pressed="false">
-    <div class="color-block bodybuilding" aria-hidden="true"></div>
-    Bodybuilding + Nutrition
+  <div class="program-card" data-program="bodybuilding" tabindex="0" aria-label="Bodybuilding and Nutrition program">
+    <img src="https://images.unsplash.com/photo-1590080877777-37d3f110d2db?auto=format&fit=crop&w=600&q=80" alt="Bodybuilding and Nutrition" />
+    <h3>Bodybuilding + Nutrition</h3>
     <p>$175/month</p>
   </div>
-  <div class="program-card diet" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" tabindex="0" role="button" aria-pressed="false">
-    <div class="color-block diet" aria-hidden="true"></div>
-    Personalized Diet Plan
+  <div class="program-card" data-program="diet" tabindex="0" aria-label="Personalized Diet Plan program">
+    <img src="https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=600&q=80" alt="Personalized Diet Plan" />
+    <h3>Personalized Diet Plan</h3>
     <p>$100</p>
   </div>
-  <div class="program-card inperson" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session" tabindex="0" role="button" aria-pressed="false">
-    <div class="color-block inperson" aria-hidden="true"></div>
-    In-Person Training
+  <div class="program-card" data-program="inperson" tabindex="0" aria-label="In-Person Training program">
+    <img src="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=600&q=80" alt="In-Person Training" />
+    <h3>In-Person Training</h3>
     <p>$50/session</p>
   </div>
 </section>
 
-<section id="program-details" aria-live="polite" aria-atomic="true" aria-relevant="additions" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1">
-  <span class="close-btn" title="Close details" role="button" tabindex="0" aria-label="Close details">&times;</span>
-  <h2 id="detail-title"></h2>
-  <p id="detail-desc"></p>
-  <p><strong>Price:</strong> <span id="detail-price"></span></p>
-  <h3>Payment Options</h3>
-  <p>Zelle / Apple Pay: 360-809-4085</p>
-  <p>Venmo: @aiden_gockerell</p>
-  <p>Cash App: $AidenGockerell</p>
-</section>
+<section id="details" aria-live="polite" aria-atomic="true" aria-relevant="additions">
+  <button class="close-btn" aria-label="Close details">&times;</button>
+  <h2 id="program-title"></h2>
+  <p id="program-desc"></p>
 
-<section id="faq" aria-label="Frequently Asked Questions">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
-    <div class="faq-question">
-      What if I have an injury or medical condition?
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer" hidden>
-      Please consult your physician before starting any training. Inform me of any conditions so I can tailor your program safely.
-    </div>
+  <h3>Payment Methods</h3>
+  <div id="payment-methods">
+    <p>Zelle: 360-809-4085</p>
+    <p>Apple Pay: 360-809-4085</p>
+    <p>Venmo: @aiden_gockerell</p>
+    <p>CashApp: $AidenGockerell</p>
   </div>
-  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
-    <div class="faq-question">
-      How do I pay for the programs?
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer" hidden>
-      Payments can be sent via Zelle, Apple Pay, Venmo, or Cash App. Details are provided when you select a program.
-    </div>
-  </div>
-  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
-    <div class="faq-question">
-      Can I change or cancel my sessions?
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer" hidden>
-      Yes, please give 24 hours notice to reschedule or cancel to avoid fees.
-    </div>
-  </div>
-</section>
 
-<section id="booking" aria-label="Book a training session">
-  <h2>Book a Session</h2>
-  <form id="booking-form" novalidate>
-    <label for="book-name">Name</label>
-    <input type="text" id="book-name" name="name" required aria-required="true" />
+  <h3>Please answer these questions before confirming</h3>
+  <form id="confirm-form" novalidate>
+    <fieldset>
+      <legend>What are your fitness goals? (Select all that apply)</legend>
+      <label><input type="checkbox" name="fitnessGoals" value="lose weight" /> Lose Weight</label><br />
+      <label><input type="checkbox" name="fitnessGoals" value="gain weight" /> Gain Weight</label><br />
+      <label><input type="checkbox" name="fitnessGoals" value="get faster" /> Get Faster</label><br />
+      <label><input type="checkbox" name="fitnessGoals" value="more explosive" /> More Explosive</label>
+    </fieldset>
 
-    <label for="book-email">Email</label>
-    <input type="email" id="book-email" name="email" required aria-required="true" />
-
-    <label for="book-phone">Phone Number</label>
-    <input type="tel" id="book-phone" name="phone" required aria-required="true" placeholder="e.g. 360-809-4085" />
-
-    <label for="book-program">Select Program</label>
-    <select id="book-program" name="program" required aria-required="true">
-      <option value="" disabled selected>Select a program</option>
-      <option value="Speed & Explosiveness">$75/month - Speed & Explosiveness</option>
-      <option value="Bodybuilding + Nutrition">$175/month - Bodybuilding + Nutrition</option>
-      <option value="Personalized Diet Plan">$100 - Personalized Diet Plan</option>
-      <option value="In-Person Training">$50/session - In-Person Training</option>
-    </select>
-
-    <label for="book-goals">What are your fitness goals?</label>
-    <select id="book-goals" name="fitnessGoals" required aria-required="true">
-      <option value="" disabled selected>Select one</option>
-      <option value="lose weight">Lose Weight</option>
-      <option value="gain weight">Gain Weight</option>
-      <option value="get faster">Get Faster</option>
-      <option value="more explosive">More Explosive</option>
-    </select>
-
-    <label for="book-medical">Do you have any medical conditions that could put you in danger from intense exercise?</label>
-    <select id="book-medical" name="medicalConditions" required aria-required="true">
+    <label for="medical-conditions">Do you have any medical conditions that could put you in danger from intense exercise?</label>
+    <select id="medical-conditions" name="medicalConditions" required aria-required="true">
       <option value="" disabled selected>Select one</option>
       <option value="no">No</option>
       <option value="yes">Yes</option>
     </select>
 
-    <label for="book-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
-    <input type="text" id="book-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required aria-required="true" />
+    <div id="morning-weight-container">
+      <label for="morning-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
+      <input type="text" id="morning-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required aria-required="true" />
+    </div>
 
-    <button type="submit" aria-label="Submit booking form">Submit Booking</button>
+    <hr />
 
-    <p id="form-message" role="alert" aria-live="polite"></p>
+    <label for="buyer-name">Your Name</label>
+    <input type="text" id="buyer-name" name="buyerName" required aria-required="true" />
+
+    <label for="buyer-email">Your Email</label>
+    <input type="email" id="buyer-email" name="buyerEmail" required aria-required="true" />
+
+    <label for="buyer-phone">Your Phone Number</label>
+    <input type="tel" id="buyer-phone" name="buyerPhone" required aria-required="true" placeholder="e.g. 360-809-4085" />
+
+    <button type="submit">Confirm Purchase</button>
+    <div id="form-message" role="alert"></div>
   </form>
 </section>
 
 <footer>
-  <p>📞 <a href="tel:3608094085">360-809-4085</a> • ✉️ <a href="mailto:Aidenbeau@icloud.com">Aidenbeau@icloud.com</a> • 📸 <a href="https://www.instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
-  <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
-  <p>&copy; 2025 AG Personal Training</p>
-</footer>
-
-<script>
-  // Program details popup
-  const cards = document.querySelectorAll('.program-card');
-  const details = document.getElementById('program-details');
-  const closeBtn = details.querySelector('.close-btn');
-  const titleEl = document.getElementById('detail-title');
-  const descEl = document.getElementById('detail-desc');
-  const priceEl = document.getElementById('detail-price');
-
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      titleEl.textContent = card.dataset.title;
-      descEl.textContent = card.dataset.desc;
-      priceEl.textContent = card.dataset.price;
-      details.style.display = 'block';
-      details.focus();
-      window.scrollTo({ top: details.offsetTop - 10, behavior: 'smooth' });
-      // Update aria-pressed
-      cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
-      card.setAttribute('aria-pressed', 'true');
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    details.style.display = 'none';
-    cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
-  });
-  closeBtn.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      closeBtn.click();
-    }
-  });
-
-  // FAQ accordion
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    item.addEventListener('click', () => toggleFaq(item));
-    item.addEventListener('keydown', e => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleFaq(item);
-      }
-    });
-  });
-
-  function toggleFaq(item) {
-    const isActive = item.classList.contains('active');
-    faqItems.forEach(i => {
-      i.classList.remove('active');
-      i.setAttribute('aria-expanded', 'false');
-      i.querySelector('.faq-answer').hidden = true;
-    });
-    if (!isActive) {
-      item.classList.add('active');
-      item.setAttribute('aria-expanded', 'true');
-      item.querySelector('.faq-answer').hidden = false;
-    }
-  }
-
-  // Booking form submission simulation
-  const bookingForm = document.getElementById('booking-form');
-  const formMessage = document.getElementById('form-message');
-
-  bookingForm.addEventListener('submit', e => {
-    e.preventDefault();
-
-    // Basic validation (HTML5 required will handle most)
-    if(!bookingForm.checkValidity()) {
-      formMessage.style.color = 'red';
-      formMessage.textContent = 'Please fill out all required fields.';
-      formMessage.style.display = 'block';
-      return;
-    }
-
-    // Simulate submission
-    formMessage.style.color = '#27ae60';
-    formMessage.textContent = 'Thank you! Your booking request has been received. I will contact you soon.';
-    formMessage.style.display = 'block';
-    bookingForm.reset();
-
-    // Scroll to form message
-    formMessage.scrollIntoView({ behavior: 'smooth' });
-  });
-</script
+  <p>Contact
