@@ -1,38 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AG Personal Training</title>
   <style>
-    /* [Same polished CSS as before—program cards, modal, form, testimonials, FAQ, etc.] */
+    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; color: #333; }
+    header { background: #111; color: #fff; text-align: center; padding: 30px 20px; }
+    h1 { margin: 0; }
+    .programs { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; gap: 20px; }
+    .program { background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 300px; cursor: pointer; overflow: hidden; transition: 0.3s; }
+    .program:hover { transform: scale(1.03); }
+    .program img { width: 100%; height: 200px; object-fit: cover; }
+    .program h3, .program p { padding: 0 15px; }
+    .details { display: none; padding: 20px; background: #fff; border-top: 1px solid #ccc; }
+    .details.active { display: block; }
+    .payment, .contact, .footer { padding: 20px; text-align: center; }
+    .footer a { color: #111; text-decoration: none; }
+    .footer { background: #eee; margin-top: 40px; font-size: 14px; }
+    button { padding: 10px 20px; margin-top: 15px; background: #e67e22; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #d35400; }
+    @media (max-width: 600px) {
+      .programs { flex-direction: column; align-items: center; }
+    }
   </style>
 </head>
 <body>
-  <header><h1>AG Personal Training</h1></header>
 
-  <section class="programs">
-    <div class="program-card" data-title="Speed & Explosiveness" data-desc="High‑intensity drills to boost acceleration, agility, and sprint speed." data-price="$75/month" data-img-large="https://picsum.photos/id/352/1200/800" data-img-small="https://picsum.photos/id/352/600/400">
-      <img src="https://picsum.photos/id/352/600/400" srcset="https://picsum.photos/id/352/600/400 600w, https://picsum.photos/id/352/1200/800 1200w" sizes="(max-width:600px) 100vw, 280px" alt="Speed Training" loading="lazy">
-      <h3>Speed & Explosiveness</h3><p>$75/month</p>
-    </div>
+<header>
+  <h1>AG Personal Training</h1>
+  <p>Phoenix, AZ — Reach Your Peak Performance</p>
+</header>
 
-    <div class="program-card" data-title="Bodybuilding + Nutrition" data-desc="Build muscle mass and follow expert nutrition plans." data-price="$175/month" data-img-large="https://picsum.photos/id/323/1200/800" data-img-small="https://picsum.photos/id/323/600/400">
-      <img src="https://picsum.photos/id/323/600/400" srcset="https://picsum.photos/id/323/600/400 600w, https://picsum.photos/id/323/1200/800 1200w" sizes="(max-width:600px) 100vw, 280px" alt="Bodybuilding Training" loading="lazy">
-      <h3>Bodybuilding + Nutrition</h3><p>$175/month</p>
-    </div>
+<section class="programs">
+  <div class="program" onclick="showDetails('speed')">
+    <img src="https://images.unsplash.com/photo-1581009146145-2aa9f09ef96d?fit=crop&w=800&q=80" alt="Speed Training">
+    <h3>Speed & Explosiveness</h3>
+    <p>$75/month</p>
+  </div>
+  <div class="program" onclick="showDetails('bodybuilding')">
+    <img src="https://images.unsplash.com/photo-1594737625785-c3d6a19f2c3d?fit=crop&w=800&q=80" alt="Bodybuilding">
+    <h3>Bodybuilding + Nutrition</h3>
+    <p>$175/month</p>
+  </div>
+  <div class="program" onclick="showDetails('diet')">
+    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?fit=crop&w=800&q=80" alt="Diet Plan">
+    <h3>Personalized Diet Plan</h3>
+    <p>$100</p>
+  </div>
+  <div class="program" onclick="showDetails('inperson')">
+    <img src="https://images.unsplash.com/photo-1597452486662-74384a73cfb7?fit=crop&w=800&q=80" alt="In-Person Training">
+    <h3>In-Person Training</h3>
+    <p>$50/session</p>
+  </div>
+</section>
 
-    <div class="program-card" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" data-img-large="https://picsum.photos/id/1080/1200/800" data-img-small="https://picsum.photos/id/1080/600/400">
-      <img src="https://picsum.photos/id/1080/600/400" srcset="https://picsum.photos/id/1080/600/400 600w, https://picsum.photos/id/1080/1200/800 1200w" sizes="(max-width:600px) 100vw, 280px" alt="Diet Plan" loading="lazy">
-      <h3>Personalized Diet Plan</h3><p>$100</p>
-    </div>
+<section id="speed" class="details">
+  <h2>Speed & Explosiveness</h2>
+  <p>Focus on acceleration, sprint mechanics, and explosive power drills. Perfect for athletes wanting to gain a competitive edge.</p>
+</section>
 
-    <div class="program-card" data-title="In-Person Training" data-desc="One‑on‑one sessions in Phoenix to maximize results." data-price="$50/session" data-img-large="https://picsum.photos/id/240/1200/800" data-img-small="https://picsum.photos/id/240/600/400">
-      <img src="https://picsum.photos/id/240/600/400" srcset="https://picsum.photos/id/240/600/400 600w, https://picsum.photos/id/240/1200/800 1200w" sizes="(max-width:600px) 100vw, 280px" alt="In-Person Training" loading="lazy">
-      <h3>In-Person Training</h3><p>$50/session</p>
-    </div>
-  </section>
+<section id="bodybuilding" class="details">
+  <h2>Bodybuilding + Nutrition</h2>
+  <p>Muscle growth plan tailored to your body type. Includes training + $75 nutrition plan with weekly adjustments and check-ins.</p>
+</section>
 
-  <!-- Include program-details, form, testimonials, FAQ, back-to-top, footer, and JS as before -->
+<section id="diet" class="details">
+  <h2>Personalized Diet Plan</h2>
+  <p>Custom diet plan based on your goals, current weight, preferences, and lifestyle. Weekly revisions and accountability.</p>
+</section>
+
+<section id="inperson" class="details">
+  <h2>In-Person Training</h2>
+  <p>One-on-one training sessions in Phoenix. Form coaching, motivation, and training tailored to your level.</p>
+</section>
+
+<section class="payment">
+  <h2>Payment Options</h2>
+  <p><strong>Zelle / Apple Pay:</strong> 360-809-4085</p>
+  <p><strong>Venmo:</strong> @aiden_gockerell</p>
+  <p><strong>Cash App:</strong> $AidenGockerell</p>
+</section>
+
+<section class="contact">
+  <h2>Contact</h2>
+  <p>Phone: <a href="tel:3608094085">360-809-4085</a></p>
+  <p>Email: <a href="mailto:aidenbeau@icloud.com">aidenbeau@icloud.com</a></p>
+</section>
+
+<footer class="footer">
+  <p>Follow me on Instagram: <a href="https://instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
+  <p>&copy; 2025 AG Personal Training</p>
+</footer>
+
+<script>
+  function showDetails(id) {
+    document.querySelectorAll('.details').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: document.getElementById(id).offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
