@@ -8,62 +8,216 @@
     body { margin:0; font-family: Arial, sans-serif; background:#f4f4f4; color:#333; scroll-behavior:smooth; }
     header { position:sticky; top:0; background:#111; color:#fff; text-align:center; padding:20px; z-index:100; }
     header h1 { margin:0; font-size:2em; }
+    .cta-button {
+      display: inline-block;
+      background: #e67e22;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select:none;
+    }
+    .cta-button:hover { background: #cf6b10; }
+
     .programs { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
     .program-card {
       background:#fff; border-radius:8px; overflow:hidden; width:280px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); cursor:pointer; transition:transform .2s;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
       display: flex; flex-direction: column; align-items: center; padding: 20px;
       color: white; font-weight: 700; font-size: 1.25em; user-select:none;
     }
-    .program-card:hover { transform:translateY(-5px); }
+    .program-card:hover { transform:translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
     .color-block {
       width: 100%;
       height: 160px;
       border-radius: 8px;
       margin-bottom: 15px;
+      transition: transform 0.3s ease;
     }
+    .program-card:hover .color-block { transform: scale(1.05); }
     .speed { background: #ff6b6b; }           /* bright red */
     .bodybuilding { background: #1e90ff; }   /* dodger blue */
     .diet { background: #ffa500; }            /* orange */
     .inperson { background: #28a745; }        /* green */
+
     #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; position:relative; color: #222;}
     @keyframes fade-in { from{opacity:0;transform:translateY(20px);} to{opacity:1; transform:none;} }
     .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#999; }
     .close-btn:hover { color:red; }
+
     footer { background:#111; color:#aaa; text-align:center; padding:20px; font-size:0.9em; margin-top:40px; }
     footer a { color:#e67e22; text-decoration:none; }
-    @media(max-width:600px) { .program-card { width:95%; } }
+    footer a:hover { text-decoration:underline; }
+
+    /* FAQ */
+    #faq {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 15px;
+    }
+    #faq h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      user-select:none;
+      transition: background 0.3s ease;
+      overflow: hidden;
+    }
+    .faq-item:hover {
+      background: #f0f0f0;
+    }
+    .faq-question {
+      padding: 15px 20px;
+      font-weight: 700;
+      color: #e67e22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+    .faq-answer {
+      max-height: 0;
+      padding: 0 20px;
+      color: #444;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      overflow: hidden;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 15px 20px 20px;
+    }
+    .faq-toggle {
+      font-weight: 900;
+      font-size: 1.6rem;
+      user-select:none;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    /* Booking form */
+    #booking {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      font-family: Arial, sans-serif;
+    }
+    #booking h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #booking form label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    #booking form input,
+    #booking form select,
+    #booking form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+    }
+    #booking form input:focus,
+    #booking form select:focus,
+    #booking form textarea:focus {
+      border-color: #e67e22;
+      outline: none;
+      box-shadow: 0 0 8px #e67e22aa;
+    }
+    #booking form button {
+      width: 100%;
+      background: #e67e22;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 15px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      user-select:none;
+      transition: background 0.3s ease;
+    }
+    #booking form button:hover {
+      background: #cf6b10;
+    }
+    #booking #form-message {
+      margin-top: 15px;
+      font-weight: 700;
+      color: #27ae60;
+      display: none;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media(max-width:600px) {
+      .program-card { width: 95%; }
+      #booking { margin: 20px 10px; padding: 20px; }
+      #faq { margin: 20px 10px 40px; }
+    }
   </style>
 </head>
 <body>
 
-<header><h1>AG Personal Training</h1></header>
+<header>
+  <h1>AG Personal Training</h1>
+  <a href="#booking" class="cta-button" aria-label="Book a session">Book A Session</a>
+</header>
 
 <section class="programs" aria-label="Programs offered">
-  <div class="program-card speed" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month">
-    <div class="color-block speed"></div>
+  <div class="program-card speed" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month" tabindex="0" role="button" aria-pressed="false">
+    <div class="color-block speed" aria-hidden="true"></div>
     Speed & Explosiveness
     <p>$75/month</p>
   </div>
-  <div class="program-card bodybuilding" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month">
-    <div class="color-block bodybuilding"></div>
+  <div class="program-card bodybuilding" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month" tabindex="0" role="button" aria-pressed="false">
+    <div class="color-block bodybuilding" aria-hidden="true"></div>
     Bodybuilding + Nutrition
     <p>$175/month</p>
   </div>
-  <div class="program-card diet" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100">
-    <div class="color-block diet"></div>
+  <div class="program-card diet" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" tabindex="0" role="button" aria-pressed="false">
+    <div class="color-block diet" aria-hidden="true"></div>
     Personalized Diet Plan
     <p>$100</p>
   </div>
-  <div class="program-card inperson" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session">
-    <div class="color-block inperson"></div>
+  <div class="program-card inperson" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session" tabindex="0" role="button" aria-pressed="false">
+    <div class="color-block inperson" aria-hidden="true"></div>
     In-Person Training
     <p>$50/session</p>
   </div>
 </section>
 
-<section id="program-details" aria-live="polite" aria-atomic="true" aria-relevant="additions">
-  <span class="close-btn" title="Close details">&times;</span>
+<section id="program-details" aria-live="polite" aria-atomic="true" aria-relevant="additions" role="dialog" aria-modal="true" aria-labelledby="detail-title" tabindex="-1">
+  <span class="close-btn" title="Close details" role="button" tabindex="0" aria-label="Close details">&times;</span>
   <h2 id="detail-title"></h2>
   <p id="detail-desc"></p>
   <p><strong>Price:</strong> <span id="detail-price"></span></p>
@@ -73,12 +227,91 @@
   <p>Cash App: $AidenGockerell</p>
 </section>
 
+<section id="faq" aria-label="Frequently Asked Questions">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
+    <div class="faq-question">
+      What if I have an injury or medical condition?
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer" hidden>
+      Please consult your physician before starting any training. Inform me of any conditions so I can tailor your program safely.
+    </div>
+  </div>
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
+    <div class="faq-question">
+      How do I pay for the programs?
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer" hidden>
+      Payments can be sent via Zelle, Apple Pay, Venmo, or Cash App. Details are provided when you select a program.
+    </div>
+  </div>
+  <div class="faq-item" tabindex="0" role="button" aria-expanded="false">
+    <div class="faq-question">
+      Can I change or cancel my sessions?
+      <span class="faq-toggle">+</span>
+    </div>
+    <div class="faq-answer" hidden>
+      Yes, please give 24 hours notice to reschedule or cancel to avoid fees.
+    </div>
+  </div>
+</section>
+
+<section id="booking" aria-label="Book a training session">
+  <h2>Book a Session</h2>
+  <form id="booking-form" novalidate>
+    <label for="book-name">Name</label>
+    <input type="text" id="book-name" name="name" required aria-required="true" />
+
+    <label for="book-email">Email</label>
+    <input type="email" id="book-email" name="email" required aria-required="true" />
+
+    <label for="book-phone">Phone Number</label>
+    <input type="tel" id="book-phone" name="phone" required aria-required="true" placeholder="e.g. 360-809-4085" />
+
+    <label for="book-program">Select Program</label>
+    <select id="book-program" name="program" required aria-required="true">
+      <option value="" disabled selected>Select a program</option>
+      <option value="Speed & Explosiveness">$75/month - Speed & Explosiveness</option>
+      <option value="Bodybuilding + Nutrition">$175/month - Bodybuilding + Nutrition</option>
+      <option value="Personalized Diet Plan">$100 - Personalized Diet Plan</option>
+      <option value="In-Person Training">$50/session - In-Person Training</option>
+    </select>
+
+    <label for="book-goals">What are your fitness goals?</label>
+    <select id="book-goals" name="fitnessGoals" required aria-required="true">
+      <option value="" disabled selected>Select one</option>
+      <option value="lose weight">Lose Weight</option>
+      <option value="gain weight">Gain Weight</option>
+      <option value="get faster">Get Faster</option>
+      <option value="more explosive">More Explosive</option>
+    </select>
+
+    <label for="book-medical">Do you have any medical conditions that could put you in danger from intense exercise?</label>
+    <select id="book-medical" name="medicalConditions" required aria-required="true">
+      <option value="" disabled selected>Select one</option>
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <label for="book-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
+    <input type="text" id="book-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required aria-required="true" />
+
+    <button type="submit" aria-label="Submit booking form">Submit Booking</button>
+
+    <p id="form-message" role="alert" aria-live="polite"></p>
+  </form>
+</section>
+
 <footer>
   <p>📞 <a href="tel:3608094085">360-809-4085</a> • ✉️ <a href="mailto:Aidenbeau@icloud.com">Aidenbeau@icloud.com</a> • 📸 <a href="https://www.instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
+  <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
   <p>&copy; 2025 AG Personal Training</p>
 </footer>
 
 <script>
+  // Program details popup
   const cards = document.querySelectorAll('.program-card');
   const details = document.getElementById('program-details');
   const closeBtn = details.querySelector('.close-btn');
@@ -92,14 +325,79 @@
       descEl.textContent = card.dataset.desc;
       priceEl.textContent = card.dataset.price;
       details.style.display = 'block';
+      details.focus();
       window.scrollTo({ top: details.offsetTop - 10, behavior: 'smooth' });
+      // Update aria-pressed
+      cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      card.setAttribute('aria-pressed', 'true');
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
     });
   });
 
   closeBtn.addEventListener('click', () => {
     details.style.display = 'none';
+    cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
   });
-</script>
+  closeBtn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      closeBtn.click();
+    }
+  });
 
-</body>
-</html>
+  // FAQ accordion
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    item.addEventListener('click', () => toggleFaq(item));
+    item.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFaq(item);
+      }
+    });
+  });
+
+  function toggleFaq(item) {
+    const isActive = item.classList.contains('active');
+    faqItems.forEach(i => {
+      i.classList.remove('active');
+      i.setAttribute('aria-expanded', 'false');
+      i.querySelector('.faq-answer').hidden = true;
+    });
+    if (!isActive) {
+      item.classList.add('active');
+      item.setAttribute('aria-expanded', 'true');
+      item.querySelector('.faq-answer').hidden = false;
+    }
+  }
+
+  // Booking form submission simulation
+  const bookingForm = document.getElementById('booking-form');
+  const formMessage = document.getElementById('form-message');
+
+  bookingForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Basic validation (HTML5 required will handle most)
+    if(!bookingForm.checkValidity()) {
+      formMessage.style.color = 'red';
+      formMessage.textContent = 'Please fill out all required fields.';
+      formMessage.style.display = 'block';
+      return;
+    }
+
+    // Simulate submission
+    formMessage.style.color = '#27ae60';
+    formMessage.textContent = 'Thank you! Your booking request has been received. I will contact you soon.';
+    formMessage.style.display = 'block';
+    bookingForm.reset();
+
+    // Scroll to form message
+    formMessage.scrollIntoView({ behavior: 'smooth' });
+  });
+</script
