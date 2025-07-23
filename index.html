@@ -1,409 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AG Personal Training</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet" />
   <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
     body {
-      margin: 0; 
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #222;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f4f4;
+      color: #333;
     }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    /* Sticky Header */
     header {
-      position: sticky;
-      top: 0;
-      background: rgba(44, 62, 80, 0.95);
-      color: #fff;
-      padding: 20px 10px;
+      background: #000;
+      color: white;
       text-align: center;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      font-family: 'Poppins', sans-serif;
+      padding: 30px 10px;
     }
     header h1 {
       margin: 0;
-      font-weight: 600;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      font-size: 2.5em;
     }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.1rem;
-      font-weight: 400;
-      opacity: 0.9;
-    }
-
-    /* Hero Section */
-    #hero {
-      background: url('https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
-      height: 350px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-      font-family: 'Poppins', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      user-select: none;
-    }
-
-    /* Programs Grid */
     .programs {
-      max-width: 1200px;
-      margin: 30px auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 30px;
-      padding: 0 10px;
+      padding: 20px;
+      gap: 20px;
     }
     .program-card {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      max-width: 280px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 280px;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      user-select: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
     }
     .program-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
+      transform: scale(1.05);
     }
     .program-card img {
       width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-      transition: transform 0.3s ease;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
-    .program-card:hover img {
-      transform: scale(1.1);
+    .program-card h3, .program-card p {
+      padding: 10px;
+      margin: 0;
     }
-    .program-card h3 {
-      font-family: 'Poppins', sans-serif;
-      margin: 15px 15px 5px;
-      font-weight: 600;
-      font-size: 1.3rem;
-      color: #333;
-    }
-    .program-card p {
-      margin: 0 15px 15px;
-      font-weight: 500;
-      color: #555;
-      font-size: 1rem;
-    }
-
-    /* Details Section */
-    #details {
-      max-width: 650px;
-      margin: 40px auto 60px;
-      background: #fff;
-      border-radius: 20px;
-      padding: 30px 40px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    #program-details {
       display: none;
-      font-size: 1.1rem;
-      color: #222;
-      user-select: none;
-      position: relative;
-    }
-    #details h2 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      margin-top: 0;
-      font-size: 2rem;
-      color: #2c3e50;
-      letter-spacing: 1px;
-    }
-    #details p {
-      margin: 12px 0 24px;
-      line-height: 1.6;
-    }
-    #payment-methods p {
-      margin: 5px 0;
-      font-weight: 600;
-      color: #444;
-    }
-    #payment-methods p::before {
-      content: "💸 ";
-    }
-    #details .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: #e67e22;
-      color: white;
-      border: none;
-      font-weight: 700;
-      font-size: 1.2rem;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s ease;
-    }
-    #details .close-btn:hover {
-      background: #cf6b10;
-    }
-
-    /* Form styles */
-    form#confirm-form label {
-      display: block;
-      margin: 12px 0 6px;
-      font-weight: 600;
-      color: #2c3e50;
-    }
-    form#confirm-form select,
-    form#confirm-form input {
-      width: 100%;
-      padding: 12px;
-      font-size: 1rem;
+      padding: 20px;
+      background: white;
+      margin: 20px auto;
       border-radius: 10px;
-      border: 1.8px solid #ccc;
-      transition: border-color 0.3s ease;
-      outline-offset: 2px;
-    }
-    form#confirm-form select:focus,
-    form#confirm-form input:focus {
-      border-color: #e67e22;
-      outline: none;
-      box-shadow: 0 0 8px #e67e22aa;
-    }
-    form#confirm-form button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 15px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #fff;
-      background: #e67e22;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-    form#confirm-form button:hover {
-      background: #cf6b10;
-    }
-
-    /* Form success message */
-    #form-message {
-      margin-top: 15px;
-      font-weight: 700;
-      color: #27ae60;
-      display: none;
-      user-select: none;
-    }
-
-    /* Footer */
-    footer {
-      background: #2c3e50;
-      color: #fff;
-      padding: 25px 10px;
-      text-align: center;
-      font-weight: 500;
-      letter-spacing: 1px;
-      font-size: 1rem;
-      user-select: none;
-    }
-    footer a {
-      color: #fff;
-      font-weight: 700;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-      vertical-align: middle;
-    }
-    footer a:hover {
-      color: #e67e22;
-    }
-    footer a.instagram-icon {
-      display: inline-block;
-      vertical-align: middle;
-      width: 28px;
-      height: 28px;
-      fill: #fff;
-      margin-left: 8px;
-    }
-
-    /* Back to Top Button */
-    #back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #e67e22;
-      color: #fff;
-      border: none;
-      padding: 14px 18px;
-      border-radius: 50%;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      display: none;
-      user-select: none;
-      transition: background 0.3s ease;
-      z-index: 9999;
-    }
-    #back-to-top:hover {
-      background: #cf6b10;
-    }
-
-    /* Testimonials */
-    #testimonials {
-      background: #fff;
-      max-width: 900px;
-      margin: 0 auto 60px;
-      padding: 40px 20px;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-      color: #2c3e50;
-    }
-    #testimonials h2 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-    .testimonial {
-      margin-bottom: 25px;
-      font-style: italic;
-      line-height: 1.5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      max-width: 600px;
       position: relative;
-      padding-left: 40px;
     }
-    .testimonial::before {
-      content: "“";
-      font-family: 'Poppins', serif;
-      font-weight: 900;
-      font-size: 3rem;
-      color: #e67e22;
+    .close-btn {
       position: absolute;
-      left: 0;
-      top: 0;
-    }
-    .testimonial-author {
-      font-weight: 700;
-      font-style: normal;
-      margin-top: 8px;
-      text-align: right;
-      font-size: 0.95rem;
-      color: #555;
-    }
-
-    /* FAQ Accordion */
-    #faq {
-      max-width: 900px;
-      margin: 0 auto 60px;
-      padding: 20px 10px 40px;
-      color: #222;
-    }
-    #faq h2 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 25px;
-      text-align: center;
-      color: #2c3e50;
-    }
-    .faq-item {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      overflow: hidden;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
       cursor: pointer;
-      user-select: none;
+      color: #999;
+      font-weight: bold;
     }
-    .faq-question {
-      padding: 18px 25px;
-      font-weight: 700;
-      font-size: 1.1rem;
+    .close-btn:hover {
+      color: red;
+    }
+    #payment-methods {
+      margin-top: 20px;
+    }
+    .contact {
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+    .contact a {
       color: #e67e22;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-decoration: none;
     }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 25px;
-      color: #444;
-      font-weight: 500;
-      transition: max-height 0.3s ease;
-      font-size: 1rem;
-    }
-    .faq-item.active .faq-answer {
-      max-height: 400px;
-      padding: 15px 25px 25px;
-    }
-    .faq-toggle {
-      font-weight: 900;
-      font-size: 1.6rem;
-      transition: transform 0.3s ease;
-      user-select: none;
-    }
-    .faq-item.active .faq-toggle {
-      transform: rotate(45deg);
-    }
-
-    /* Parallax Section */
-    #parallax {
-      background: url('https://images.unsplash.com/photo-1526401485004-0b4c2f0aeecb?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
-      height: 300px;
-      margin: 60px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-      user-select: none;
-    }
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      .program-card {
-        max-width: 90vw;
-      }
-      #details {
-        margin: 30px 15px 50px;
-        padding: 25px 20px;
-      }
-      #hero {
-        font-size: 2rem;
-        height: 250px;
-      }
-      #parallax {
-        font-size: 1.8rem;
-        height: 220px;
-      }
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -414,131 +100,79 @@
   <p>Phoenix, AZ — Reach your peak performance</p>
 </header>
 
-<section id="hero" aria-label="Main banner">
-  YOUR PEAK PERFORMANCE STARTS HERE
-</section>
-
-<section class="programs" id="program-list" aria-label="Programs offered">
-  <div class="program-card" data-program="speed" tabindex="0" aria-label="Speed and Explosiveness program">
-    <img src="https://images.unsplash.com/photo-1594737625785-43f24d05d372?auto=format&fit=crop&w=600&q=80" alt="Speed and Explosiveness Training" />
+<section class="programs">
+  <div class="program-card" data-title="Speed & Explosiveness" data-price="$75/month" data-description="High-intensity drills to increase your acceleration, sprinting speed, and athletic explosiveness." data-img="https://via.placeholder.com/600x400?text=Speed+Explosiveness">
+    <img src="https://via.placeholder.com/600x400?text=Speed+Explosiveness" alt="Speed & Explosiveness" />
     <h3>Speed & Explosiveness</h3>
     <p>$75/month</p>
   </div>
-  <div class="program-card" data-program="bodybuilding" tabindex="0" aria-label="Bodybuilding and Nutrition program">
-    <img src="https://images.unsplash.com/photo-1590080877777-37d3f110d2db?auto=format&fit=crop&w=600&q=80" alt="Bodybuilding and Nutrition" />
+  <div class="program-card" data-title="Bodybuilding + Nutrition" data-price="$175/month" data-description="A complete hypertrophy training program with customized macronutrients and weekly diet adjustments." data-img="https://via.placeholder.com/600x400?text=Bodybuilding+Nutrition">
+    <img src="https://via.placeholder.com/600x400?text=Bodybuilding+Nutrition" alt="Bodybuilding + Nutrition" />
     <h3>Bodybuilding + Nutrition</h3>
     <p>$175/month</p>
   </div>
-  <div class="program-card" data-program="diet" tabindex="0" aria-label="Personalized Diet Plan program">
-    <img src="https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=600&q=80" alt="Personalized Diet Plan" />
+  <div class="program-card" data-title="Personalized Diet Plan" data-price="$100" data-description="Personal meal plan tailored to your body weight, goals, and preferences. Updated monthly." data-img="https://via.placeholder.com/600x400?text=Diet+Plan">
+    <img src="https://via.placeholder.com/600x400?text=Diet+Plan" alt="Personalized Diet Plan" />
     <h3>Personalized Diet Plan</h3>
     <p>$100</p>
   </div>
-  <div class="program-card" data-program="inperson" tabindex="0" aria-label="In-Person Training program">
-    <img src="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=600&q=80" alt="In-Person Training" />
+  <div class="program-card" data-title="In-Person Training" data-price="$50/session" data-description="One-on-one in-person sessions in Phoenix, AZ to guide form, push limits, and tailor results." data-img="https://via.placeholder.com/600x400?text=In-Person+Training">
+    <img src="https://via.placeholder.com/600x400?text=In-Person+Training" alt="In-Person Training" />
     <h3>In-Person Training</h3>
     <p>$50/session</p>
   </div>
 </section>
 
-<section id="details" aria-live="polite" aria-atomic="true" aria-relevant="additions">
-  <button class="close-btn" aria-label="Close details">&times;</button>
+<section id="program-details">
+  <span class="close-btn" title="Close">&times;</span>
+  <img id="detail-img" src="" alt="" style="width:100%; border-radius:10px; margin-bottom: 15px;" />
   <h2 id="program-title"></h2>
-  <p id="program-desc"></p>
+  <p id="program-description"></p>
+  <p><strong>Price:</strong> <span id="program-price"></span></p>
 
   <h3>Payment Methods</h3>
-  <div id="payment-methods"></div>
+  <p><strong>Zelle:</strong> 360-809-4085</p>
+  <p><strong>Apple Pay:</strong> 360-809-4085</p>
+  <p><strong>Venmo:</strong> @aiden_gockerell</p>
+  <p><strong>Cash App:</strong> $AidenGockerell</p>
+</section>
 
-  <h3>Please answer these questions before confirming</h3>
-  <form id="confirm-form" novalidate>
-    <label for="fitness-goals">What are your fitness goals?</label>
-    <select id="fitness-goals" name="fitnessGoals" required aria-required="true">
-      <option value="" disabled selected>Select one</option>
-      <option value="lose weight">Lose Weight</option>
-      <option value="gain weight">Gain Weight</option>
-      <option value="get faster">Get Faster</option>
-      <option value="more explosive">More Explosive</option>
-    </select>
+<section class="contact">
+  <h2>Contact</h2>
+  <p><strong>Phone:</strong> <a href="tel:3608094085">360-809-4085</a></p>
+  <p><strong>Email:</strong> <a href="mailto:aidenbeau@icloud.com">aidenbeau@icloud.com</a></p>
+  <p><strong>Instagram:</strong> <a href="https://www.instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
+</section>
 
-    <label for="medical-conditions">Do you have any medical conditions that could put you in danger from intense exercise?</label>
-    <select id="medical-conditions" name="medicalConditions" required aria-required="true">
-      <option value="" disabled selected>Select one</option>
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
+<footer>
+  &copy; 2025 AG Personal Training. All rights reserved.
+</footer>
 
-    <div id="morning-weight-container">
-      <label for="morning-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
-      <input type="text" id="morning-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required aria-required="true" />
-    </div>
-
-    <hr />
-
-    <label for="buyer-name">Your Name</label>
-    <input type="text" id="buyer-name" name="buyerName" required aria-required="true" />
-
-    <label for="buyer-email">Your Email</label>
-    <input type="email" id="buyer-email" name="buyerEmail" required aria-required="true" />
-
-    <label for="buyer-phone">Your Phone Number</label>
-    <input type="tel" id="buyer-phone" name="buyerPhone" required aria-required="true" placeholder="e.g. 360-809-4085" />
-    <script>
-  const data = {
-    speed: { title:'Speed & Explosiveness', desc:'Improve speed, agility & explosion.', price:'$75/month' },
-    bodybuilding: { title:'Bodybuilding + Nutrition', desc:'Build muscle and optimize nutrition.', price:'$175/month' },
-    diet: { title:'Personalized Diet Plan', desc:'Customized meal plans for your goals.', price:'$100' },
-    inperson: { title:'In‑Person Training', desc:'One‑on‑one sessions for maximum results.', price:'$50/session' },
-  };
-
-  const paymentHtml = `
-    <p>Zelle / Apple Pay: 360‑809‑4085</p>
-    <p>Venmo: @aiden_gockerell</p>
-    <p>CashApp: $AidenGockerell</p>
-  `;
-
+<script>
   const cards = document.querySelectorAll('.program-card');
-  const details = document.getElementById('details');
+  const details = document.getElementById('program-details');
   const closeBtn = details.querySelector('.close-btn');
-  const titleEl = document.getElementById('program-title');
-  const descEl = document.getElementById('program-desc');
-  const payEl = document.getElementById('payment-methods');
-  const weightContainer = document.getElementById('morning-weight-container');
-  const form = document.getElementById('confirm-form');
-  const formMessage = document.getElementById('form-message');
-  const backTop = document.getElementById('back-to-top');
+  const detailTitle = document.getElementById('program-title');
+  const detailDesc = document.getElementById('program-description');
+  const detailPrice = document.getElementById('program-price');
+  const detailImg = document.getElementById('detail-img');
 
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      const key = card.getAttribute('data-program');
-      const prog = data[key];
-      titleEl.textContent = `${prog.title} — ${prog.price}`;
-      descEl.textContent = prog.desc;
-      payEl.innerHTML = paymentHtml;
-      weightContainer.style.display = key === 'diet' ? 'block' : 'none';
-      form.reset();
-      formMessage.style.display = 'none';
+      detailTitle.textContent = card.dataset.title;
+      detailDesc.textContent = card.dataset.description;
+      detailPrice.textContent = card.dataset.price;
+      detailImg.src = card.dataset.img;
+      detailImg.alt = card.dataset.title;
       details.style.display = 'block';
-      details.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({ top: details.offsetTop - 20, behavior: 'smooth' });
     });
   });
 
   closeBtn.addEventListener('click', () => {
     details.style.display = 'none';
   });
+</script>
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    alert('✅ Thank you! Your purchase confirmation has been sent.');
-    formMessage.style.display = 'block';
-    details.scrollIntoView({ behavior: 'smooth' });
-  });
-
-  window.addEventListener('scroll', () => {
-    backTop.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  backTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Hide weight field initially
-  weightContainer.style.display = 'none'
+</body>
+</html>
