@@ -6,12 +6,12 @@
   <title>AG Personal Training</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet" />
   <style>
-    /* Base styling */
+    /* Reset & base */
     * {
       box-sizing: border-box;
     }
     body {
-      margin: 0;
+      margin: 0; 
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: #222;
@@ -22,7 +22,7 @@
       color: inherit;
       text-decoration: none;
     }
-    /* Header */
+    /* Sticky Header */
     header {
       position: sticky;
       top: 0;
@@ -47,22 +47,25 @@
       font-weight: 400;
       opacity: 0.9;
     }
-    /* Hero */
+
+    /* Hero Section */
     #hero {
-      background: url('https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat fixed;
+      background: linear-gradient(135deg, #4b6cb7, #182848);
       height: 350px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
       font-family: 'Poppins', sans-serif;
       font-size: 3rem;
       font-weight: 700;
       letter-spacing: 3px;
       user-select: none;
+      text-align: center;
+      padding: 0 15px;
     }
-    /* Programs container */
+
+    /* Programs Grid */
     .programs {
       max-width: 1200px;
       margin: 30px auto;
@@ -72,20 +75,19 @@
       gap: 30px;
       padding: 0 10px;
     }
-    /* Program cards without images */
     .program-card {
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
       max-width: 280px;
-      padding: 30px 20px;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      overflow: hidden;
       user-select: none;
       border-left: 8px solid transparent;
+      padding: 25px 20px;
       text-align: center;
     }
     .program-card:hover {
@@ -94,22 +96,23 @@
     }
     .program-card h3 {
       font-family: 'Poppins', sans-serif;
-      margin: 0 0 10px;
+      margin: 15px 0 5px;
       font-weight: 600;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: #333;
     }
     .program-card p {
       margin: 0;
-      font-weight: 600;
+      font-weight: 500;
       color: #555;
       font-size: 1.1rem;
     }
-    /* Color-coded left borders */
-    .program-speed { border-left-color: #3498db; }       /* Blue */
-    .program-bodybuilding { border-left-color: #e74c3c; }/* Red */
-    .program-diet { border-left-color: #27ae60; }        /* Green */
-    .program-inperson { border-left-color: #f39c12; }    /* Orange */
+    /* Color coding border for programs */
+    .program-speed { border-left-color: #3498db; }      /* blue */
+    .program-bodybuilding { border-left-color: #e74c3c; } /* red */
+    .program-diet { border-left-color: #27ae60; }       /* green */
+    .program-inperson { border-left-color: #f39c12; }   /* orange */
+
     /* Details Section */
     #details {
       max-width: 650px;
@@ -163,7 +166,8 @@
     #details .close-btn:hover {
       background: #cf6b10;
     }
-    /* Booking form */
+
+    /* Form styles */
     form#confirm-form label {
       display: block;
       margin: 12px 0 6px;
@@ -203,6 +207,7 @@
     form#confirm-form button:hover {
       background: #cf6b10;
     }
+
     /* Form success message */
     #form-message {
       margin-top: 15px;
@@ -211,6 +216,7 @@
       display: none;
       user-select: none;
     }
+
     /* Footer */
     footer {
       background: #2c3e50;
@@ -232,6 +238,15 @@
     footer a:hover {
       color: #e67e22;
     }
+    footer a.instagram-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+      margin-left: 8px;
+    }
+
     /* Back to Top Button */
     #back-to-top {
       position: fixed;
@@ -253,6 +268,21 @@
     #back-to-top:hover {
       background: #cf6b10;
     }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .program-card {
+        max-width: 90vw;
+      }
+      #details {
+        margin: 30px 15px 50px;
+        padding: 25px 20px;
+      }
+      #hero {
+        font-size: 2rem;
+        height: 250px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -269,15 +299,15 @@
 <section class="programs" id="program-list" aria-label="Programs offered">
   <div class="program-card program-speed" data-program="speed" tabindex="0" aria-label="Speed and Explosiveness program">
     <h3>Speed & Explosiveness</h3>
-    <p>$75/month - 1 month plan</p>
+    <p>$75/month — 1 month plan</p>
   </div>
   <div class="program-card program-bodybuilding" data-program="bodybuilding" tabindex="0" aria-label="Bodybuilding and Nutrition program">
     <h3>Bodybuilding + Nutrition</h3>
-    <p>$175/month - 1 month plan</p>
+    <p>$175/month — 1 month plan</p>
   </div>
   <div class="program-card program-diet" data-program="diet" tabindex="0" aria-label="Personalized Diet Plan program">
     <h3>Personalized Diet Plan</h3>
-    <p>$100 - 1 month plan</p>
+    <p>$100 — 1 month plan</p>
   </div>
   <div class="program-card program-inperson" data-program="inperson" tabindex="0" aria-label="In-Person Training program">
     <h3>In-Person Training</h3>
@@ -294,8 +324,8 @@
   <div id="payment-methods">
     <p>Zelle: 360-809-4085</p>
     <p>Apple Pay: 360-809-4085</p>
-    <p>Venmo: @aiden_gockerell</p>
-    <p>Cashapp: $AidenGockerell</p>
+    <p>Venmo: aiden_gockerell</p>
+    <p>CashApp: $AidenGockerell</p>
   </div>
 
   <h3>Please answer these questions before confirming</h3>
@@ -309,7 +339,7 @@
 
     <div id="morning-weight-container">
       <label for="morning-weight">What is your morning body weight? (Answer "No" if not purchasing Diet Plan)</label>
-      <input type="text" id="morning-weight" name="morningWeight" placeholder='e.g. "150" or "No"' />
+      <input type="text" id="morning-weight" name="morningWeight" placeholder='e.g. "150" or "No"' required aria-required="true" />
     </div>
 
     <hr />
@@ -324,39 +354,46 @@
     <input type="tel" id="buyer-phone" name="buyerPhone" required aria-required="true" placeholder="e.g. 360-809-4085" />
 
     <button type="submit">Confirm Purchase</button>
-    <div id="form-message" role="alert"></div>
+    <p id="form-message" role="alert"></p>
   </form>
 </section>
 
 <footer>
   <p>Contact: <a href="tel:3608094085">360-809-4085</a> | <a href="mailto:aidenbeau@icloud.com">aidenbeau@icloud.com</a></p>
-  <p>Payment: Zelle: 360-809-4085 | Apple Pay: 360-809-4085 | Venmo: <a href="https://venmo.com/aiden_gockerell" target="_blank" rel="noopener noreferrer">@aiden_gockerell</a> | Cashapp: $AidenGockerell</p>
-  <p>Follow me on Instagram: <a href="https://www.instagram.com/aiden.gockerell" target="_blank" rel="noopener noreferrer" aria-label="Instagram">@aiden.gockerell</a></p>
+  <p>
+    Payment Info: Zelle: 360-809-4085 | Apple Pay: 360-809-4085 | Venmo: aiden_gockerell | CashApp: $AidenGockerell
+  </p>
+  <p>
+    Follow me on
+    <a href="https://www.instagram.com/aiden.gockerell/" target="_blank" rel="noopener" aria-label="Instagram">
+      Instagram
+    </a>
+  </p>
 </footer>
 
-<button id="back-to-top" aria-label="Back to top">↑</button>
+<button id="back-to-top" aria-label="Back to top">&#8679;</button>
 
 <script>
   const programs = {
     speed: {
-      title: "Speed & Explosiveness",
-      description: "Train to be faster and more explosive with tailored workouts designed to boost your speed and power. 1 month plan.",
+      title: 'Speed & Explosiveness',
+      description: 'Train to get faster and more explosive. Improve your agility and performance with expert guidance.',
     },
     bodybuilding: {
-      title: "Bodybuilding + Nutrition",
-      description: "Gain muscle and improve your physique with personalized bodybuilding programs combined with nutritional guidance. 1 month plan.",
+      title: 'Bodybuilding + Nutrition',
+      description: 'Build muscle and get shredded with tailored workout and nutrition plans.',
     },
     diet: {
-      title: "Personalized Diet Plan",
-      description: "Custom diet plans designed to fit your lifestyle and goals for optimal health and performance. 1 month plan.",
+      title: 'Personalized Diet Plan',
+      description: 'Customized meal plans designed for your goals and lifestyle. Perfect for weight management and health.',
     },
     inperson: {
-      title: "In-Person Training",
-      description: "Hands-on training sessions with personal coaching to ensure proper form, motivation, and results. $50 per session.",
-    },
+      title: 'In-Person Training',
+      description: 'One-on-one sessions focused on your individual fitness goals, technique, and motivation.',
+    }
   };
 
-  const programList = document.getElementById('program-list');
+  const programCards = document.querySelectorAll('.program-card');
   const detailsSection = document.getElementById('details');
   const closeBtn = document.querySelector('#details .close-btn');
   const programTitle = document.getElementById('program-title');
@@ -364,73 +401,65 @@
   const form = document.getElementById('confirm-form');
   const formMessage = document.getElementById('form-message');
   const morningWeightContainer = document.getElementById('morning-weight-container');
-  const morningWeightInput = morningWeightContainer.querySelector('input');
 
-  let currentProgram = null;
-
-  programList.addEventListener('click', e => {
-    const card = e.target.closest('.program-card');
-    if (!card) return;
-    currentProgram = card.getAttribute('data-program');
-    showDetails(currentProgram);
-  });
-
-  // keyboard support
-  programList.addEventListener('keydown', e => {
-    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('program-card')) {
-      e.preventDefault();
-      currentProgram = e.target.getAttribute('data-program');
-      showDetails(currentProgram);
-    }
-  });
-
-  closeBtn.addEventListener('click', () => {
-    detailsSection.style.display = 'none';
-    form.reset();
-    formMessage.style.display = 'none';
-  });
-
-  function showDetails(programKey) {
+  function openDetails(programKey) {
     const program = programs[programKey];
     programTitle.textContent = program.title;
     programDesc.textContent = program.description;
 
+    // Show or hide morning weight question only if 'diet' program selected
     if(programKey === 'diet') {
       morningWeightContainer.style.display = 'block';
-      morningWeightInput.required = true;
+      morningWeightContainer.querySelector('input').required = true;
     } else {
       morningWeightContainer.style.display = 'none';
-      morningWeightInput.required = false;
-      morningWeightInput.value = '';
+      morningWeightContainer.querySelector('input').required = false;
+      morningWeightContainer.querySelector('input').value = '';
     }
 
     detailsSection.style.display = 'block';
+    detailsSection.focus();
+    currentProgram = programKey;
     formMessage.style.display = 'none';
-    window.scrollTo({top: detailsSection.offsetTop - 20, behavior: 'smooth'});
+    form.reset();
   }
+
+  function closeDetails() {
+    detailsSection.style.display = 'none';
+  }
+
+  let currentProgram = null;
+
+  programCards.forEach(card => {
+    card.addEventListener('click', () => openDetails(card.dataset.program));
+    card.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        openDetails(card.dataset.program);
+        e.preventDefault();
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeDetails);
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    formMessage.style.display = 'none';
-
-    if(!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    formMessage.textContent = `Thanks, ${form['buyerName'].value}! Your purchase of "${programs[currentProgram].title}" is received. We will contact you soon.`;
     formMessage.style.color = '#27ae60';
+    formMessage.textContent = `Thank you for purchasing the ${programs[currentProgram].title}! We will contact you shortly.`;
     formMessage.style.display = 'block';
     form.reset();
   });
 
   // Back to top button
-  const backToTopBtn = document.getElementById('back-to-top');
+  const backToTop = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) backToTopBtn.style.display = 'block';
-    else backToTopBtn.style.display = 'none';
+    if(window.scrollY > 300) {
+      backToTop.style.display = 'block';
+    } else {
+      backToTop.style.display = 'none';
+    }
   });
-  backToTopBtn.addEventListener('click', () => {
+  backToTop.addEventListener('click', () => {
     window.scrollTo({top: 0, behavior: 'smooth'});
   });
 </script>
