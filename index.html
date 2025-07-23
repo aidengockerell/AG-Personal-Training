@@ -13,7 +13,7 @@
     .program-card:hover { transform:translateY(-5px); }
     .program-card img { width:100%; height:160px; object-fit:cover; }
     .program-card h3, .program-card p { padding:10px; margin:0; }
-    #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; }
+    #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; position:relative; }
     @keyframes fade-in { from{opacity:0;transform:translateY(20px);} to{opacity:1; transform:none;} }
     .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#999; }
     .close-btn:hover { color:red; }
@@ -26,39 +26,39 @@
 
 <header><h1>AG Personal Training</h1></header>
 
-<section class="programs">
-  <div class="program-card" data-title="Speed & Explosiveness" data-desc="High‑intensity drills to boost acceleration and explosiveness." data-price="$75/month" data-img="https://source.unsplash.com/WLUHO9A_xik/800x600">
-    <img src="https://source.unsplash.com/WLUHO9A_xik/800x600" alt="Sprinter training" loading="lazy">
+<section class="programs" aria-label="Programs offered">
+  <div class="program-card" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month" data-img="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80" alt="Sprinter training" loading="lazy" />
     <h3>Speed & Explosiveness</h3><p>$75/month</p>
   </div>
-  <div class="program-card" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month" data-img="https://source.unsplash.com/C6oPXOatFD8/800x600">
-    <img src="https://source.unsplash.com/C6oPXOatFD8/800x600" alt="Bodybuilding session" loading="lazy">
+  <div class="program-card" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month" data-img="https://images.unsplash.com/photo-1590080877777-37d3f110d2db?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1590080877777-37d3f110d2db?auto=format&fit=crop&w=800&q=80" alt="Bodybuilding session" loading="lazy" />
     <h3>Bodybuilding + Nutrition</h3><p>$175/month</p>
   </div>
-  <div class="program-card" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" data-img="https://source.unsplash.com/3tYZjGSBwbk/800x600">
-    <img src="https://source.unsplash.com/3tYZjGSBwbk/800x600" alt="Healthy meal prep" loading="lazy">
+  <div class="program-card" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" data-img="https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1540206395-68808572332f?auto=format&fit=crop&w=800&q=80" alt="Healthy meal prep" loading="lazy" />
     <h3>Personalized Diet Plan</h3><p>$100</p>
   </div>
-  <div class="program-card" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session" data-img="https://source.unsplash.com/MDZAbQApcKY/800x600">
-    <img src="https://source.unsplash.com/MDZAbQApcKY/800x600" alt="Trainer coaching athlete" loading="lazy">
+  <div class="program-card" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session" data-img="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=800&q=80">
+    <img src="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=800&q=80" alt="Trainer coaching athlete" loading="lazy" />
     <h3>In-Person Training</h3><p>$50/session</p>
   </div>
 </section>
 
-<section id="program-details">
-  <span class="close-btn" title="Close">&times;</span>
-  <img id="detail-img" src="" alt="" style="width:100%; border-radius:8px; margin-bottom:15px;" loading="lazy">
+<section id="program-details" aria-live="polite" aria-atomic="true" aria-relevant="additions">
+  <span class="close-btn" title="Close details">&times;</span>
+  <img id="detail-img" src="" alt="" style="width:100%; border-radius:8px; margin-bottom:15px;" loading="lazy" />
   <h2 id="detail-title"></h2>
   <p id="detail-desc"></p>
   <p><strong>Price:</strong> <span id="detail-price"></span></p>
   <h3>Payment Options</h3>
-  <p>Zelle / Apple Pay: 360‑809‑4085</p>
+  <p>Zelle / Apple Pay: 360-809-4085</p>
   <p>Venmo: @aiden_gockerell</p>
-  <p>Cash App: $AidenGockerell</p>
+  <p>Cash App: $AidenGockerell</p>
 </section>
 
 <footer>
-  <p>📞 <a href="tel:3608094085">360‑809‑4085</a> • ✉️ <a href="mailto:Aidenbeau@icloud.com">Aidenbeau@icloud.com</a> • 📸 <a href="https://www.instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
+  <p>📞 <a href="tel:3608094085">360-809-4085</a> • ✉️ <a href="mailto:Aidenbeau@icloud.com">Aidenbeau@icloud.com</a> • 📸 <a href="https://www.instagram.com/aiden.gockerell" target="_blank">@aiden.gockerell</a></p>
   <p>&copy; 2025 AG Personal Training</p>
 </footer>
 
