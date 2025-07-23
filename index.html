@@ -9,11 +9,24 @@
     header { position:sticky; top:0; background:#111; color:#fff; text-align:center; padding:20px; z-index:100; }
     header h1 { margin:0; font-size:2em; }
     .programs { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .program-card { background:#fff; border-radius:8px; overflow:hidden; width:280px; box-shadow:0 2px 8px rgba(0,0,0,0.1); cursor:pointer; transition:transform .2s; }
+    .program-card {
+      background:#fff; border-radius:8px; overflow:hidden; width:280px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1); cursor:pointer; transition:transform .2s;
+      display: flex; flex-direction: column; align-items: center; padding: 20px;
+      color: white; font-weight: 700; font-size: 1.25em; user-select:none;
+    }
     .program-card:hover { transform:translateY(-5px); }
-    .program-card img { width:100%; height:160px; object-fit:cover; }
-    .program-card h3, .program-card p { padding:10px; margin:0; }
-    #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; position:relative; }
+    .color-block {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .speed { background: #ff6b6b; }           /* bright red */
+    .bodybuilding { background: #1e90ff; }   /* dodger blue */
+    .diet { background: #ffa500; }            /* orange */
+    .inperson { background: #28a745; }        /* green */
+    #program-details { display:none; max-width:600px; margin:20px auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2); animation:fade-in .3s ease-in-out; position:relative; color: #222;}
     @keyframes fade-in { from{opacity:0;transform:translateY(20px);} to{opacity:1; transform:none;} }
     .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:#999; }
     .close-btn:hover { color:red; }
@@ -27,27 +40,30 @@
 <header><h1>AG Personal Training</h1></header>
 
 <section class="programs" aria-label="Programs offered">
-  <div class="program-card" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month" data-img="https://images.unsplash.com/photo-1508606572321-901ea443707f?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1508606572321-901ea443707f?auto=format&fit=crop&w=800&q=80" alt="Athlete sprinting on track" loading="lazy" />
-    <h3>Speed & Explosiveness</h3><p>$75/month</p>
+  <div class="program-card speed" data-title="Speed & Explosiveness" data-desc="High-intensity drills to boost acceleration and explosiveness." data-price="$75/month">
+    <div class="color-block speed"></div>
+    Speed & Explosiveness
+    <p>$75/month</p>
   </div>
-  <div class="program-card" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month" data-img="https://images.unsplash.com/photo-1514516875773-98a245b84998?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1514516875773-98a245b84998?auto=format&fit=crop&w=800&q=80" alt="Bodybuilder lifting weights" loading="lazy" />
-    <h3>Bodybuilding + Nutrition</h3><p>$175/month</p>
+  <div class="program-card bodybuilding" data-title="Bodybuilding + Nutrition" data-desc="Muscle-building workouts paired with nutrition coaching." data-price="$175/month">
+    <div class="color-block bodybuilding"></div>
+    Bodybuilding + Nutrition
+    <p>$175/month</p>
   </div>
-  <div class="program-card" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100" data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Colorful healthy meal bowl" loading="lazy" />
-    <h3>Personalized Diet Plan</h3><p>$100</p>
+  <div class="program-card diet" data-title="Personalized Diet Plan" data-desc="Custom meal plan tailored to your goals and lifestyle." data-price="$100">
+    <div class="color-block diet"></div>
+    Personalized Diet Plan
+    <p>$100</p>
   </div>
-  <div class="program-card" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session" data-img="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1554284126-0b09f1e960e2?auto=format&fit=crop&w=800&q=80" alt="Personal trainer coaching client" loading="lazy" />
-    <h3>In-Person Training</h3><p>$50/session</p>
+  <div class="program-card inperson" data-title="In-Person Training" data-desc="One-on-one coaching sessions in Phoenix to maximize your potential." data-price="$50/session">
+    <div class="color-block inperson"></div>
+    In-Person Training
+    <p>$50/session</p>
   </div>
 </section>
 
 <section id="program-details" aria-live="polite" aria-atomic="true" aria-relevant="additions">
   <span class="close-btn" title="Close details">&times;</span>
-  <img id="detail-img" src="" alt="" style="width:100%; border-radius:8px; margin-bottom:15px;" loading="lazy" />
   <h2 id="detail-title"></h2>
   <p id="detail-desc"></p>
   <p><strong>Price:</strong> <span id="detail-price"></span></p>
@@ -66,15 +82,12 @@
   const cards = document.querySelectorAll('.program-card');
   const details = document.getElementById('program-details');
   const closeBtn = details.querySelector('.close-btn');
-  const imgEl = document.getElementById('detail-img');
   const titleEl = document.getElementById('detail-title');
   const descEl = document.getElementById('detail-desc');
   const priceEl = document.getElementById('detail-price');
 
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      imgEl.src = card.dataset.img;
-      imgEl.alt = card.dataset.title;
       titleEl.textContent = card.dataset.title;
       descEl.textContent = card.dataset.desc;
       priceEl.textContent = card.dataset.price;
